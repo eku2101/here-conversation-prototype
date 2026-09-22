@@ -1,28 +1,249 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Simulate a personalized notification filter for in-person conversations.">
-<title>In-Person Focus</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23365249'/%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
-</head>
-<body>
-<header><a href="./" class="brand"><span class="brand-icon">◎</span> In-Person Focus</a><span class="pill">Interactive prototype</span></header>
-<main>
-<section class="intro"><p class="eyebrow">MAKE ROOM FOR THE PERSON IN FRONT OF YOU</p><h1>A little less noise.<br>A little more presence.</h1><p>Let the important things through. Give everything else a moment.</p></section>
-<div class="workspace">
-<section class="controls" aria-label="Focus settings">
-<div class="activation"><div><span class="eyebrow">01 / SET THE MOMENT</span><h2>In-Person Focus Mode</h2><p id="focus-description">Turn on Focus to choose who can interrupt.</p></div><button id="focus-toggle" class="switch" role="switch" aria-checked="false" aria-label="In-Person Focus Mode"><span></span></button></div>
-<div class="settings-heading"><span class="eyebrow">02 / CHOOSE WHAT GETS THROUGH</span><span id="settings-status">Activate to customize</span></div>
-<fieldset id="contact-settings" disabled><legend>Important Contacts</legend><p>Messages from selected people can interrupt you.</p><div class="contacts"><label><span class="avatar mom" data-avatar="Mom">M</span><span>Mom</span><input type="checkbox" value="Mom" checked></label><label><span class="avatar friend" data-avatar="Best Friend">B</span><span>Best Friend</span><input type="checkbox" value="Best Friend" checked></label><label><span class="avatar partner" data-avatar="Partner">P</span><span>Partner</span><input type="checkbox" value="Partner"></label></div><small>Unselected contacts wait until Focus ends. Changes apply to new messages.</small></fieldset><details class="photo-settings"><summary>Sync profile pictures</summary><p>Choose a picture for each contact. It updates their card and every notification in this demo. Pictures stay in this tab only.</p><label>Mom<input type="file" accept="image/png,image/jpeg,image/webp" data-photo="Mom"></label><label>Best Friend<input type="file" accept="image/png,image/jpeg,image/webp" data-photo="Best Friend"></label><label>Partner<input type="file" accept="image/png,image/jpeg,image/webp" data-photo="Partner"></label><button id="clear-photos" class="text-button">Remove all pictures</button><p id="photo-feedback" role="status">PNG, JPG, or WebP · up to 5 MB each.</p></details>
-<section class="category"><div class="category-icon urgent">!</div><div><h3>Emergency Messages</h3><p>Always come through, whoever sends them.</p></div><span class="badge">Always allowed</span></section>
-<section class="category"><div class="category-icon quiet">Ⅱ</div><div><h3>Low-Priority Notifications</h3><p>Choose which social updates and group chats should wait until Focus ends.</p></div><span class="badge neutral">Your choice</span></section>
-<fieldset id="category-settings" disabled><legend>Block while Focus is on</legend><div class="category-options"><label><input type="checkbox" value="tiktok" checked> TikTok videos</label><label><input type="checkbox" value="instagram" checked> Instagram likes</label><label><input type="checkbox" value="group" checked> Non-urgent group chats</label></div><small>Uncheck a category to let it interrupt. Emergency messages cannot be blocked.</small></fieldset><section class="simulator"><div class="section-heading"><span class="eyebrow">03 / TRY YOUR FILTER</span><button id="reset" class="text-button">Reset demo</button></div><label for="message-type">Simulate an incoming notification</label><div class="send-row"><select id="message-type"><optgroup label="Important Contacts"><option value="mom">Mom · message</option><option value="friend">Best Friend · message</option><option value="partner">Partner · message</option></optgroup><optgroup label="Emergency Messages"><option value="emergency">Emergency · unknown contact</option></optgroup><optgroup label="Low-Priority Notifications"><option value="tiktok">TikTok · new video</option><option value="instagram">Instagram · like</option><option value="group">Group chat · weekend plans</option></optgroup></select><button id="send" class="primary">Send test <span aria-hidden="true">↗</span></button></div><p id="feedback" role="status">No real messages are sent. Try a notification to see what happens.</p></section>
-</section>
-<aside class="preview" aria-label="Simulated phone preview"><div class="preview-heading"><span class="eyebrow">YOUR PHONE, WITH A LITTLE MORE QUIET</span></div><section class="conversation" aria-label="Conversation state"><div><span>Conversation Mood</span><strong id="mood">Positive</strong></div><div><label for="attention">Attention</label><strong id="attention-value">100%</strong></div><progress id="attention" max="100" value="100">100%</progress><p id="effect" role="status">Ready for a conversation.</p><button id="reconnect" class="text-button">Take a moment to reconnect (+10%)</button><details><summary>How the simulation works</summary><p>Allowed low-priority alerts cost 15 attention points; contacts and emergencies cost 5. Blocked alerts cost nothing. Opening a message costs another 5 points once. Reconnecting restores 10 points. Mood is Positive at 80–100, Distracted at 50–79, and Disconnected below 50. These are illustrative assumptions, not measured feelings.</p></details></section><div class="phone"><div class="phone-top"><span>9:41</span><span aria-hidden="true">▮▮▮ &nbsp; ▰</span></div><div class="phone-focus"><div id="focus-symbol">◎</div><h2 id="phone-title">You're available</h2><p id="phone-description">All notifications can come through.</p><span id="phone-badge">Focus off</span></div><div class="notification-heading"><h3>Notifications</h3><span id="delivered-count">0 received</span></div><div id="delivered" class="notifications"><p class="empty">Your phone is quiet for now.<br>Send a test notification to begin.</p></div><div class="phone-bottom"></div></div><div class="queue"><details id="queue-details"><summary>Waiting for later <span id="queue-count">0</span></summary><p>These updates stay quiet while Focus is on. They are BLOCKED from interrupting, not deleted. You can open one deliberately or turn Focus off to release the batch.</p><div id="delayed"><p class="empty">Nothing waiting. A little breathing room.</p></div></details></div></aside>
-</div>
-<footer><p>Designed for the conversation you're already in.</p><span>Simulation only · No phone access · Nothing saved</span></footer>
-</main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Simulate a personalized notification filter for in-person conversations."
+    />
+    <title>In-Person Focus</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23365249'/%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <a href="./" class="brand"
+        ><span class="brand-icon">◎</span> In-Person Focus</a
+      ><span class="pill">Conceptual prototype</span>
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">MAKE ROOM FOR THE PERSON IN FRONT OF YOU</p>
+        <h1>A little less noise.<br />A little more presence.</h1>
+        <p>
+          Explore how selective notifications change a conversation. Choose
+          settings, turn on Focus, and send a test.
+        </p>
+      </section>
+      <div class="workspace">
+        <section class="controls" aria-label="Focus settings">
+          <div class="activation">
+            <div>
+              <span class="eyebrow">FOCUS FILTER</span>
+              <h2>In-Person Focus Mode</h2>
+              <p id="focus-description">
+                Choose your settings anytime. Turn on Focus to apply them.
+              </p>
+            </div>
+            <button
+              id="focus-toggle"
+              class="switch"
+              role="switch"
+              aria-checked="false"
+              aria-label="In-Person Focus Mode"
+            >
+              <span></span>
+            </button>
+          </div>
+          <div class="settings-heading">
+            <span class="eyebrow">CHOOSE WHAT GETS THROUGH</span
+            ><span id="settings-status">Ready to customize</span>
+          </div>
+          <fieldset id="contact-settings">
+            <legend>Important Contacts</legend>
+            <p>Messages from selected people can interrupt you.</p>
+            <div class="contacts">
+              <label
+                ><span class="avatar mom" data-avatar="Mom">M</span
+                ><span>Mom</span
+                ><input type="checkbox" value="Mom" checked /></label
+              ><label
+                ><span class="avatar friend" data-avatar="Best Friend">B</span
+                ><span>Best Friend</span
+                ><input type="checkbox" value="Best Friend" checked /></label
+              ><label
+                ><span class="avatar partner" data-avatar="Partner">P</span
+                ><span>Partner</span><input type="checkbox" value="Partner"
+              /></label>
+            </div>
+            <small
+              >Unselected contacts wait until Focus ends. Changes apply to new
+              messages.</small
+            >
+          </fieldset>
+          <details class="photo-settings">
+            <summary>Sync profile pictures</summary>
+            <p>
+              Choose a picture for each contact. It updates their card and every
+              notification in this demo. Pictures stay in this tab only.
+            </p>
+            <label
+              >Mom<input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                data-photo="Mom" /></label
+            ><label
+              >Best Friend<input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                data-photo="Best Friend" /></label
+            ><label
+              >Partner<input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                data-photo="Partner" /></label
+            ><button id="clear-photos" class="text-button">
+              Remove all pictures
+            </button>
+            <p id="photo-feedback" role="status">
+              PNG, JPG, or WebP · up to 5 MB each.
+            </p>
+          </details>
+          <section class="category">
+            <div class="category-icon urgent">!</div>
+            <div>
+              <h3>Emergency Messages</h3>
+              <p>Always come through, whoever sends them.</p>
+            </div>
+            <span class="badge">Always allowed</span>
+          </section>
+          <section class="category">
+            <div class="category-icon quiet">Ⅱ</div>
+            <div>
+              <h3>Low-Priority Notifications</h3>
+              <p>
+                Choose which social updates and group chats should wait until
+                Focus ends.
+              </p>
+            </div>
+            <span class="badge neutral">Your choice</span>
+          </section>
+          <fieldset id="category-settings">
+            <legend>Block while Focus is on</legend>
+            <div class="category-options">
+              <label
+                ><input type="checkbox" value="tiktok" checked /> TikTok
+                videos</label
+              ><label
+                ><input type="checkbox" value="instagram" checked /> Instagram
+                likes</label
+              ><label
+                ><input type="checkbox" value="group" checked /> Non-urgent
+                group chats</label
+              >
+            </div>
+            <small
+              >Uncheck a category to let it interrupt. Emergency messages cannot
+              be blocked.</small
+            >
+          </fieldset>
+          <section class="simulator">
+            <div class="section-heading">
+              <span class="eyebrow">TRY YOUR FILTER</span
+              ><button id="reset" class="text-button">Reset demo</button>
+            </div>
+            <label for="message-type">Simulate an incoming notification</label>
+            <div class="send-row">
+              <select id="message-type">
+                <optgroup label="Important Contacts">
+                  <option value="mom">Mom · message</option>
+                  <option value="friend">Best Friend · message</option>
+                  <option value="partner">Partner · message</option>
+                </optgroup>
+                <optgroup label="Emergency Messages">
+                  <option value="emergency">Emergency · unknown contact</option>
+                </optgroup>
+                <optgroup label="Low-Priority Notifications">
+                  <option value="tiktok">TikTok · new video</option>
+                  <option value="instagram">Instagram · like</option>
+                  <option value="group">Group chat · weekend plans</option>
+                </optgroup></select
+              ><button id="send" class="primary">
+                Send test <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <p id="feedback" role="status">
+              No real messages are sent. Try a notification to see what happens.
+            </p>
+          </section>
+        </section>
+        <aside class="preview" aria-label="Simulated phone preview">
+          <div class="preview-heading">
+            <span class="eyebrow">YOUR PHONE, WITH A LITTLE MORE QUIET</span>
+          </div>
+          <section class="conversation" aria-label="Conversation state">
+            <div>
+              <span>Conversation Mood</span><strong id="mood">Positive</strong>
+            </div>
+            <div>
+              <label for="attention">Attention</label
+              ><strong id="attention-value">100%</strong>
+            </div>
+            <progress id="attention" max="100" value="100">100%</progress>
+            <p id="effect" role="status">Ready for a conversation.</p>
+            <button id="reconnect" class="text-button">
+              Take a moment to reconnect (+10%)
+            </button>
+            <details>
+              <summary>How the simulation works</summary>
+              <p>
+                Allowed low-priority alerts cost 15 attention points; contacts
+                and emergencies cost 5. Blocked alerts cost nothing. Opening a
+                message costs another 5 points once. Reconnecting restores 10
+                points. Mood is Positive at 80–100, Distracted at 50–79, and
+                Disconnected below 50. These are illustrative assumptions, not
+                measured feelings.
+              </p>
+            </details>
+          </section>
+          <div class="phone">
+            <div class="phone-top">
+              <span>9:41</span><span aria-hidden="true">▮▮▮ &nbsp; ▰</span>
+            </div>
+            <div class="phone-focus">
+              <div id="focus-symbol">◎</div>
+              <h2 id="phone-title">You're available</h2>
+              <p id="phone-description">All notifications can come through.</p>
+              <span id="phone-badge">Focus off</span>
+            </div>
+            <div class="notification-heading">
+              <h3>Notifications</h3>
+              <span id="delivered-count">0 received</span>
+            </div>
+            <div id="delivered" class="notifications">
+              <p class="empty">
+                Your phone is quiet for now.<br />Send a test notification to
+                begin.
+              </p>
+            </div>
+            <div class="phone-bottom"></div>
+          </div>
+          <div class="queue">
+            <details id="queue-details">
+              <summary>
+                Waiting for later <span id="queue-count">0</span>
+              </summary>
+              <p>
+                These updates stay quiet while Focus is on. They are BLOCKED
+                from interrupting, not deleted. You can open one deliberately or
+                turn Focus off to release the batch.
+              </p>
+              <div id="delayed">
+                <p class="empty">Nothing waiting. A little breathing room.</p>
+              </div>
+            </details>
+          </div>
+        </aside>
+      </div>
+      <footer>
+        <p>Designed for the conversation you're already in.</p>
+        <span>Simulation only · No phone access · Nothing saved</span>
+      </footer>
+    </main>
+  </body>
 </html>

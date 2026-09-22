@@ -1,47 +1,72 @@
 # In-Person Focus
 
-A simple, responsive HTML/CSS/JavaScript prototype simulating a personalized notification filter for in-person conversations.
+A self-contained conceptual prototype exploring whether selective notification filtering can help people stay present in a conversation while allowing important communication through. It does not recreate or control Apple's Focus system.
 
-## Try it
+## Open and explore
 
-Open `index.html` in a modern browser. No installation, dependencies, or build step required.
+Double-click `index.html` to open it in a modern browser. No installation, internet connection, build step, or server is required.
 
-1. Activate **In-Person Focus Mode**.
-2. Select important contacts: Mom, Best Friend, or Partner. Mom and Best Friend are selected initially.
-3. Choose a fictional notification and click **Send test**.
-4. Watch allowed messages appear on the phone and delayed messages collect under **Waiting for later**.
-5. Turn Focus off to release all waiting messages. **Reset demo** clears messages and restores defaults.
+1. Choose important contacts and blocked notification categories. These controls work even when Focus is off.
+2. Turn on **In-Person Focus Mode** to apply your choices.
+3. Select a fictional notification and click **Send test**.
+4. Read its **ALLOWED / BLOCKED** result and watch Attention and Conversation Mood.
+5. Open or dismiss a message, try other settings, or take a moment to reconnect.
 
-## Filtering rules
+Turning Focus off releases waiting messages as one batch. **Reset demo** restores initial settings, 100% attention, Positive mood, and clears messages and profile pictures.
 
-| Notification | Focus on | Focus off |
-| --- | --- | --- |
-| Selected important contact | Allowed | Delivered |
-| Unselected contact | Delayed | Delivered |
-| Emergency, including unknown sender | Always allowed | Delivered |
-| TikTok, Instagram, non-urgent group chat | Delayed | Delivered |
+## How filtering works
 
-Contact settings unlock after activation. Changes apply to future incoming messages; existing delayed messages stay in the queue until Focus ends. Emergency priority is an explicit category in the simulated data, not an automatic emergency detection system. Low-priority notifications are delayed rather than deleted.
+| Incoming message                | Focus on       | Focus off |
+| ------------------------------- | -------------- | --------- |
+| Emergency                       | Always allowed | Allowed   |
+| Selected contact                | Allowed        | Allowed   |
+| Unselected contact              | Blocked        | Allowed   |
+| Checked low-priority category   | Blocked        | Allowed   |
+| Unchecked low-priority category | Allowed        | Allowed   |
 
-## Privacy and scope
+BLOCKED means held quietly under **Waiting for later**, not deleted. Changing settings affects new arrivals. You can deliberately open a held message, which costs attention. Emergency status is part of the fictional sample data; the app does not detect real emergencies.
 
-This is a simulation. It does not access a phone, change device Focus settings, read contacts, detect emergencies, or send real notifications. All examples are fictional. State exists only in memory and resets on reload. No network requests or external dependencies are needed.
+## Understand and edit the code
 
-## Files and validation
+The application uses only these three files:
 
-- `index.html`: accessible controls and simulated phone interface
-- `styles.css`: responsive visual design
-- `app.js`: filtering, queue, and interface behavior
-- `test.cjs`: regression checks; run `node test.cjs`
+- **index.html** — page structure, contact/category controls, and simulated phone. Edit labels and explanatory text here.
+- **styles.css** — colors, spacing, responsive layouts, and notification styles. Shared colors are defined in `:root` at the beginning.
+- **app.js** — sample messages, session variables, filtering, rendering, and event handlers, with comments marking the main sections.
 
-The earlier conversation-momentum experiment is preserved in the repository's commit history. This version focuses on the personalized notification filter.
+Useful starting points in `app.js`:
 
-## Personalized filtering and conversation state
+- `messages`: change fictional senders and notification text.
+- `active`, `selected`, `blockedTypes`: Focus and filter settings.
+- `attention`, `conversationMood`: current conversation state.
+- `decision()`: determines whether an incoming notification is allowed.
+- `changeAttention()`: clamps attention to 0–100 and derives the mood.
+- `render()`: updates the UI from the variables.
+- The `send` event handler: applies an interruption cost and routes the message.
+- `interact()`: handles opening and dismissing a message.
 
-Choose which low-priority types to block during Focus. Each incoming message displays ALLOWED or BLOCKED with its reason. BLOCKED means held quietly in the waiting queue, not deleted. Settings changes apply to future arrivals. Emergencies always override the filter.
+## Conversation assumptions
 
-Attention starts at 100%. Allowed low-priority alerts cost 15 points; allowed contact or emergency messages cost 5. Blocked alerts cost zero. Opening any message deliberately costs another 5 points, once per message. Dismiss removes a message without changing attention. Turning Focus off releases the waiting queue as a single interruption costing 5 points. Reconnect restores up to 10 points. Attention is clamped to 0–100. Mood is Positive at 80–100, Distracted at 50–79, and Disconnected below 50. These values are illustrative assumptions, not research findings or a measure of anyone's actual emotions. Blocking preserves the current state; it does not automatically restore attention already lost.
+These are design assumptions for exploration, not scientific measurements of feelings:
 
-## Profile pictures
+- Start at 100% attention and Positive mood.
+- An allowed low-priority notification costs 15 attention points.
+- An allowed contact or emergency message costs 5 points.
+- A blocked notification costs no points and preserves the current mood.
+- Opening a message costs 5 additional points, once per message.
+- Dismissing a message costs nothing.
+- Releasing a waiting batch when Focus ends costs 5 points total.
+- Reconnecting restores up to 10 points.
+- Mood is Positive at 80–100, Distracted at 50–79, and Disconnected below 50.
 
-Expand **Sync profile pictures** to choose a PNG, JPG, or WebP up to 5 MB per contact. The same local picture appears in that contact's card and all current and future notifications, including held notifications. Pictures use in-memory object URLs, never upload, and do not sync with external accounts or real contacts. Replace a picture by selecting another file, or remove all pictures with the provided button. Reset and page reload clear them. Decoding is validated before applying a picture; stale uploads cannot restore photos after reset.
+Blocking prevents further loss; it does not automatically restore attention. The interface also explains these rules under **How the simulation works**.
+
+## Pictures and privacy
+
+**Sync profile pictures** lets you choose a PNG, JPG, or WebP up to 5 MB per contact. The picture updates that contact's card and existing/future notifications in this tab. This is local visual syncing, not integration with real contacts or accounts.
+
+Everything stays in JavaScript memory. There is no database, login, external API, backend, analytics, or localStorage. Pictures are local object URLs, never uploaded. Reloading or resetting clears the session. No external fonts, scripts, or images are required.
+
+## Optional developer checks
+
+`test.cjs` contains regression checks. If Node.js is already installed, run `node test.cjs`. This file is not loaded by the application and Node.js is not needed to use the prototype.
