@@ -2,6 +2,16 @@
 
 A self-contained conceptual prototype exploring whether selective notification filtering can help people stay present in a conversation while allowing important communication through. It does not recreate or control Apple's Focus system.
 
+## Project guide
+
+The starting observation is that repeatedly checking a phone during an in-person conversation can seem to interrupt its momentum and leave the other person less engaged. This project turns that observation into an interactive model that invites exploration rather than claiming to prove an effect.
+
+- **README.md** (this document): project overview, instructions, and implementation guide.
+- **[Design.md](Design.md)**: the question, design decisions, and how the phenomenon is represented in code.
+- **[Learningnotes.md](Learningnotes.md)**: documented revisions, the role of AI assistance, limitations, and questions for further reflection.
+
+For a quick demonstration, reset the app, leave Focus off, and send two TikTok notifications. Attention falls from 100% to 70%, and mood becomes Distracted. Reset again, turn Focus on with TikTok blocked, and send the same two notifications: attention remains at 100% and mood stays Positive. Then send a message from selected contact Mom: it is allowed, and attention falls to 95%. These outcomes follow the programmed rules; they are not experimental evidence about real conversations.
+
 ## Open and explore
 
 Double-click `index.html` to open it in a modern browser. No installation, internet connection, build step, or server is required.
