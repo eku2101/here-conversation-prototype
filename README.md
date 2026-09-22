@@ -1,30 +1,37 @@
-# Here — a conversation experiment
+# In-Person Focus
 
-A simple HTML, CSS, and JavaScript prototype exploring how repeated phone notifications can interrupt an in-person conversation, and how intentional delivery might help.
+A simple, responsive HTML/CSS/JavaScript prototype simulating a personalized notification filter for in-person conversations.
 
-## Run
+## Try it
 
-Open `index.html` in a modern browser. No installation or build is required. The optional Google Fonts stylesheet falls back to system fonts offline.
+Open `index.html` in a modern browser. No installation, dependencies, or build step required.
 
-## Explore
+1. Activate **In-Person Focus Mode**.
+2. Select important contacts: Mom, Best Friend, or Partner. Mom and Best Friend are selected initially.
+3. Choose a fictional notification and click **Send test**.
+4. Watch allowed messages appear on the phone and delayed messages collect under **Waiting for later**.
+5. Turn Focus off to release all waiting messages. **Reset demo** clears messages and restores defaults.
 
-1. Choose **As they happen** and start the 60-second conversation.
-2. Check your phone or let an alert wait. Watch the dialogue, momentum, and time present change.
-3. Try **With intention**. Routine notifications are held; an urgent family message comes through.
-4. Finish both modes to compare the latest results. Switching modes resets the current run. Pause freezes the simulation; reset starts a fresh run. Waiting messages are revealed at the end.
+## Filtering rules
 
-## Model and limitations
+| Notification | Focus on | Focus off |
+| --- | --- | --- |
+| Selected important contact | Allowed | Delivered |
+| Unselected contact | Delayed | Delivered |
+| Emergency, including unknown sender | Always allowed | Delivered |
+| TikTok, Instagram, non-urgent group chat | Delayed | Delivered |
 
-This is a fictional, illustrative model, not research evidence or a measurement of a real person's feelings. Momentum starts at 70, recovers 1 point per present second, loses 4 per delivered alert, and loses 12 per phone check. A check occupies 4 simulated seconds. Scores are clamped to 0–100. Six messages arrive at 8-second intervals from second 8 to second 48; the message at second 32 is urgent. The same schedule is used in both modes. User behavior affects comparisons, so these are not controlled causal results.
+Contact settings unlock after activation. Changes apply to future incoming messages; existing delayed messages stay in the queue until Focus ends. Emergency priority is an explicit category in the simulated data, not an automatic emergency detection system. Low-priority notifications are delayed rather than deleted.
 
-No real notifications, phone access, tracking, accounts, or data storage. Results exist only in memory and disappear on page reload. The simulated clock advances once per timer callback and may slow in background tabs.
+## Privacy and scope
 
-## Files
+This is a simulation. It does not access a phone, change device Focus settings, read contacts, detect emergencies, or send real notifications. All examples are fictional. State exists only in memory and resets on reload. No network requests or external dependencies are needed.
 
-- `index.html` — semantic interface
-- `styles.css` — responsive layout and styling
-- `app.js` — simulation, notification queue, and comparison
+## Files and validation
 
-## Reflection
+- `index.html`: accessible controls and simulated phone interface
+- `styles.css`: responsive visual design
+- `app.js`: filtering, queue, and interface behavior
+- `test.cjs`: regression checks; run `node test.cjs`
 
-When is checking a phone appropriate? What should count as urgent? Would agreeing on a pause together feel different from quietly checking? How could a future user study test this model's assumptions?
+The earlier conversation-momentum experiment is preserved in the repository's commit history. This version focuses on the personalized notification filter.

@@ -1,39 +1,28 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="An interactive experiment in phone notifications and being present in conversation.">
-  <title>Here — a conversation experiment</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23365249'/%3E%3Ctext x='10' y='29' font-size='30' fill='%23faf6ee'%3Eh%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Simulate a personalized notification filter for in-person conversations.">
+<title>In-Person Focus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23365249'/%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
 </head>
 <body>
-  <header><a class="brand" href="./">here<span>●</span></a><span class="eyebrow">A LITTLE EXPERIMENT IN PRESENCE</span><span class="prototype">Interactive prototype</span></header>
-  <main>
-    <section class="intro"><p class="eyebrow">LESS INTERRUPTED. MORE CONNECTED.</p><h1>Be here, together.</h1><p>What happens to a conversation when your phone keeps asking for your attention?<br>Try two ways of receiving the same notifications.</p></section>
-    <div class="workspace">
-      <section class="experiment" aria-labelledby="scene-title">
-        <div class="section-top"><div><span class="eyebrow">THE CONVERSATION</span><h2 id="scene-title">Catching up over coffee</h2></div><span id="status" class="status">Ready when you are</span></div>
-        <div class="people"><div><span class="avatar you">Y</span><strong>You</strong><small id="attention">Present</small></div><div class="connection"><span>↔</span><small id="connection">Room to connect</small></div><div><span class="avatar friend">S</span><strong>Sam</strong><small id="feeling">Ready to share</small></div></div>
-        <div class="dialogue"><span class="eyebrow">SAM</span><p id="dialogue">“I’ve been wanting to tell you about something…”</p></div>
-        <div class="flow-top"><label for="engagement">Conversation momentum</label><strong id="score">70 / 100</strong></div><meter id="engagement" min="0" max="100" value="70">70 out of 100</meter>
-        <div class="timeline-head"><span class="eyebrow">MOMENTUM OVER TIME</span><span id="time">0 / 60 seconds</span></div>
-        <svg class="chart" viewBox="0 0 600 100" role="img" aria-labelledby="chart-title"><title id="chart-title">Illustrative conversation momentum, starting at 70 out of 100</title><path class="grid" d="M0 15H600M0 50H600M0 85H600"/><polyline id="trace" points="0,36"/></svg>
-        <div class="playback"><button id="start" class="primary">Start conversation <span>→</span></button><button id="reset" class="secondary">↺ Reset</button></div>
-      </section>
-      <aside class="settings" aria-labelledby="delivery-title"><span class="eyebrow">YOUR NOTIFICATIONS</span><h2 id="delivery-title">Choose how they arrive.</h2>
-        <fieldset><legend class="sr-only">Notification delivery mode</legend><label class="mode"><input type="radio" name="mode" value="instant" checked><span><strong>As they happen</strong><small>Every notification arrives immediately.</small></span><span class="mode-icon">↗</span></label><label class="mode"><input type="radio" name="mode" value="intentional"><span><strong>With intention</strong><small>Hold routine updates. Let urgent ones through.</small></span><span class="mode-icon">◎</span></label></fieldset>
-        <p class="hint">Switching modes starts a fresh conversation, with the same notification schedule.</p>
-        <div class="inbox"><div class="inbox-top"><strong>On your phone</strong><span id="held">0 held</span></div><div id="notification" aria-live="polite"><p class="empty">Nothing needs your attention.<br>Enjoy the moment.</p></div><div class="phone-actions"><button id="check" class="secondary" disabled>Check phone</button><button id="defer" class="secondary" disabled>Let it wait</button></div></div>
-        <p id="delivery-note" class="delivery-note">Updates will arrive at 8, 16, 24, 32, 40, and 48 seconds.</p>
-      </aside>
-    </div>
-    <section class="results" aria-label="Session results"><div><span class="eyebrow">THIS CONVERSATION</span><h2>Small shifts, different outcomes.</h2></div><div class="stat"><strong id="checks">0</strong><span>phone checks</span></div><div class="stat"><strong id="interruptions">0</strong><span>delivered interruptions</span></div><div class="stat"><strong id="present">0s</strong><span>time present</span></div></section>
-    <section id="summary" class="summary" hidden aria-live="polite"></section>
-    <details><summary>What does this experiment model?</summary><p>This is an illustrative design experiment, not a prediction or validated measurement of anyone’s feelings. Momentum starts at 70 and recovers by 1 point per present second. Each delivered alert costs 4 points; checking a batch costs 12 points and 4 seconds of attention. Momentum stays between 0 and 100.</p><p>Both modes receive six identical updates. One urgent message arrives at 32 seconds. Intentional mode holds the five routine updates until the conversation ends. You can also choose to check held updates yourself. All messages are fictional; the prototype never accesses your phone, sends notifications, or saves personal data.</p><p>Try each mode and reflect: when would it feel appropriate to check a phone? Would agreeing on a pause together change the experience?</p></details>
-    <footer><span class="brand">here<span>●</span></span><p>A moment of attention can make room for connection.</p><span>DESIGN EXPLORATION · 01</span></footer>
-  </main>
+<header><a href="./" class="brand"><span class="brand-icon">◎</span> In-Person Focus</a><span class="pill">Interactive prototype</span></header>
+<main>
+<section class="intro"><p class="eyebrow">MAKE ROOM FOR THE PERSON IN FRONT OF YOU</p><h1>A little less noise.<br>A little more presence.</h1><p>Let the important things through. Give everything else a moment.</p></section>
+<div class="workspace">
+<section class="controls" aria-label="Focus settings">
+<div class="activation"><div><span class="eyebrow">01 / SET THE MOMENT</span><h2>In-Person Focus Mode</h2><p id="focus-description">Turn on Focus to choose who can interrupt.</p></div><button id="focus-toggle" class="switch" role="switch" aria-checked="false" aria-label="In-Person Focus Mode"><span></span></button></div>
+<div class="settings-heading"><span class="eyebrow">02 / CHOOSE WHAT GETS THROUGH</span><span id="settings-status">Activate to customize</span></div>
+<fieldset id="contact-settings" disabled><legend>Important Contacts</legend><p>Messages from selected people can interrupt you.</p><div class="contacts"><label><span class="avatar mom">M</span><span>Mom</span><input type="checkbox" value="Mom" checked></label><label><span class="avatar friend">B</span><span>Best Friend</span><input type="checkbox" value="Best Friend" checked></label><label><span class="avatar partner">P</span><span>Partner</span><input type="checkbox" value="Partner"></label></div><small>Unselected contacts wait until Focus ends. Changes apply to new messages.</small></fieldset>
+<section class="category"><div class="category-icon urgent">!</div><div><h3>Emergency Messages</h3><p>Always come through, whoever sends them.</p></div><span class="badge">Always allowed</span></section>
+<section class="category"><div class="category-icon quiet">Ⅱ</div><div><h3>Low-Priority Notifications</h3><p>TikTok videos, Instagram likes, and non-urgent group chats wait until Focus ends.</p></div><span class="badge neutral">Delayed</span></section>
+<section class="simulator"><div class="section-heading"><span class="eyebrow">03 / TRY YOUR FILTER</span><button id="reset" class="text-button">Reset demo</button></div><label for="message-type">Simulate an incoming notification</label><div class="send-row"><select id="message-type"><optgroup label="Important Contacts"><option value="mom">Mom · message</option><option value="friend">Best Friend · message</option><option value="partner">Partner · message</option></optgroup><optgroup label="Emergency Messages"><option value="emergency">Emergency · unknown contact</option></optgroup><optgroup label="Low-Priority Notifications"><option value="tiktok">TikTok · new video</option><option value="instagram">Instagram · like</option><option value="group">Group chat · weekend plans</option></optgroup></select><button id="send" class="primary">Send test <span aria-hidden="true">↗</span></button></div><p id="feedback" role="status">No real messages are sent. Try a notification to see what happens.</p></section>
+</section>
+<aside class="preview" aria-label="Simulated phone preview"><div class="preview-heading"><span class="eyebrow">YOUR PHONE, WITH A LITTLE MORE QUIET</span></div><div class="phone"><div class="phone-top"><span>9:41</span><span aria-hidden="true">▮▮▮ &nbsp; ▰</span></div><div class="phone-focus"><div id="focus-symbol">◎</div><h2 id="phone-title">You're available</h2><p id="phone-description">All notifications can come through.</p><span id="phone-badge">Focus off</span></div><div class="notification-heading"><h3>Notifications</h3><span id="delivered-count">0 received</span></div><div id="delivered" class="notifications"><p class="empty">Your phone is quiet for now.<br>Send a test notification to begin.</p></div><div class="phone-bottom"></div></div><div class="queue"><details id="queue-details"><summary>Waiting for later <span id="queue-count">0</span></summary><p>These updates stay quiet while Focus is on. Turning it off releases them to your phone.</p><div id="delayed"><p class="empty">Nothing waiting. A little breathing room.</p></div></details></div></aside>
+</div>
+<footer><p>Designed for the conversation you're already in.</p><span>Simulation only · No phone access · Nothing saved</span></footer>
+</main>
 </body>
 </html>
