@@ -12,16 +12,16 @@ The intended user is a person who wants to give someone their attention without 
 
 The prototype makes an otherwise hard-to-see change in attention visible. A user selects a fictional notification, the code evaluates the filter settings, and the interface shows the outcome alongside the simulated conversation state.
 
-| Part of the experience | Representation in the prototype |
-| --- | --- |
-| Choosing to protect a conversation | `active`, controlled by the Focus switch |
-| Deciding who is important | `selected`, a set of allowed contacts |
-| Deciding which updates can wait | `blockedTypes`, a set of notification categories |
-| Receiving a notification | A fictional entry from `messages` |
-| Applying a personalized filter | `decision()` returns an allow/block result and reason |
-| Staying present or becoming distracted | `attention`, a value from 0 to 100 |
-| The conversation's apparent emotional state | `conversationMood`, derived from attention |
-| Returning to the conversation | A reconnect button that restores attention |
+| Part of the experience                      | Representation in the prototype                       |
+| ------------------------------------------- | ----------------------------------------------------- |
+| Choosing to protect a conversation          | `active`, controlled by the Focus switch              |
+| Deciding who is important                   | `selected`, a set of allowed contacts                 |
+| Deciding which updates can wait             | `blockedTypes`, a set of notification categories      |
+| Receiving a notification                    | A fictional entry from `messages`                     |
+| Applying a personalized filter              | `decision()` returns an allow/block result and reason |
+| Staying present or becoming distracted      | `attention`, a value from 0 to 100                    |
+| The conversation's apparent emotional state | `conversationMood`, derived from attention            |
+| Returning to the conversation               | A reconnect button that restores attention            |
 
 Mood is calculated from attention; it is not an independent observation of another person's feelings. The numbers are deliberately simple and editable so the model's assumptions can be questioned.
 
@@ -72,3 +72,11 @@ The simulation assumes that every allowed notification has an immediate attentio
 ## A possible next evaluation
 
 Ask someone to configure the filter, predict what will happen to a few messages, and explain the results afterward. Observe whether they understand the settings, the waiting queue, and the distinction between important and distracting interruptions. Ask which assumptions feel inaccurate. This would evaluate the clarity of the design; a claim about real conversational benefit would require a separate study.
+
+## Visual direction and first visit
+
+The interface uses [Figma's California beaches palette](https://www.figma.com/resource-library/color-combinations/#combination-29-california-beaches): orange `#FFC067`, aqua `#66F4FF`, sky blue `#66C4FF`, and blue-gray `#7D99AA`. Pale surfaces and dark blue text support readability.
+
+A brief first-visit introduction distinguishes this simulation from Apple's real notification controls. Apple Focus already supports selected people and apps; the prototype's distinguishing purpose is to visualize assumed conversation effects. The comparison references [Apple's Focus guide](https://support.apple.com/guide/iphone/allow-or-silence-notifications-for-a-focus-iph21d43af5b/ios).
+
+Only a dismissed-introduction flag is saved in localStorage. If storage is unavailable, the introduction may appear again after reload; the app remains usable. The footer button reopens it anytime. Resetting the simulation does not reset this preference.

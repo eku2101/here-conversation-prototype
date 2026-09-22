@@ -10,7 +10,7 @@
     <title>In-Person Focus</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23365249'/%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%2323546d'/%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
@@ -241,9 +241,49 @@
         </aside>
       </div>
       <footer>
+        <button id="about-prototype" class="text-button">
+          How is this different from Do Not Disturb?
+        </button>
         <p>Designed for the conversation you're already in.</p>
-        <span>Simulation only · No phone access · Nothing saved</span>
+        <span>Simulation only · No phone access</span>
       </footer>
     </main>
+    <dialog
+      id="welcome"
+      class="welcome"
+      aria-labelledby="welcome-title"
+      aria-describedby="welcome-description"
+    >
+      <span class="eyebrow">WELCOME TO IN-PERSON FOCUS</span>
+      <h2 id="welcome-title">A conversation experiment.</h2>
+      <div id="welcome-description">
+        <p>
+          Apple's Do Not Disturb manages real device notifications. As part of
+          Focus, it can allow exceptions for selected people and apps.
+        </p>
+        <p>
+          <strong>In-Person Focus is a simulation:</strong> try fictional
+          notifications and see how your choices affect an illustrative
+          Attention score and Conversation Mood. It explores being present with
+          another person; it does not change your device settings or measure
+          real emotions.
+        </p>
+        <p>
+          Choose your contacts and categories, turn on Focus, then send a test
+          notification.
+        </p>
+      </div>
+      <p class="source">
+        <a
+          href="https://support.apple.com/guide/iphone/allow-or-silence-notifications-for-a-focus-iph21d43af5b/ios"
+          target="_blank"
+          rel="noopener noreferrer"
+          >About Apple's Focus settings</a
+        >
+      </p>
+      <button id="welcome-start" class="primary" autofocus>
+        Explore the prototype →
+      </button>
+    </dialog>
   </body>
 </html>

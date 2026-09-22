@@ -7,6 +7,13 @@ class Element {
     this.listeners = {};
     this.classList = { toggle() {} };
   }
+  showModal() {
+    this.open = true;
+  }
+  close() {
+    this.open = false;
+    this.listeners.close?.();
+  }
   addEventListener(name, fn) {
     this.listeners[name] = fn;
   }

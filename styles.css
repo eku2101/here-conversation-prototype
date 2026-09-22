@@ -702,3 +702,138 @@ footer span {
   background: #e5eaf0;
   color: #4d627c;
 }
+
+/* California beaches: Figma combination 29. Dark ink supports readable contrast. */
+:root {
+  --sand: #ffc067;
+  --aqua: #66f4ff;
+  --sky: #66c4ff;
+  --slate: #7d99aa;
+  --green: #23546d;
+  --muted: #506574;
+  --line: #cfdee7;
+  color: #203e51;
+  background: #f3faff;
+}
+header {
+  border-top: 5px solid var(--sand);
+}
+.eyebrow,
+.text-button,
+.notification small {
+  color: #345c73;
+}
+.contacts label:has(:checked) {
+  background: #e1faff;
+  border-color: #38829c;
+}
+.mom,
+.urgent {
+  background: var(--sand);
+  color: #50360f;
+}
+.friend {
+  background: var(--aqua);
+  color: #164b59;
+}
+.partner {
+  background: var(--sky);
+  color: #183f58;
+}
+.badge,
+.quiet {
+  background: #dff9ff;
+  color: #234f63;
+}
+.badge.neutral {
+  background: #fff0d8;
+  color: #62451c;
+}
+.switch {
+  background: var(--slate);
+}
+.primary {
+  background: var(--sky);
+  color: #173b50;
+}
+.primary:hover {
+  background: var(--aqua);
+}
+.phone {
+  border-color: #34566b;
+  background: linear-gradient(155deg, #66f4ff55, #66c4ff33 50%, #ffc06744);
+}
+.phone.active #focus-symbol {
+  background: var(--sky);
+  color: #203e51;
+}
+.phone.active #phone-badge {
+  background: var(--aqua);
+  color: #203e51;
+}
+#focus-symbol {
+  color: #34566b;
+}
+.phone-bottom {
+  background: #34566b;
+}
+.queue {
+  background: #e7f5fc;
+}
+.queue summary span {
+  background: var(--sky);
+  color: #203e51;
+}
+.notification .avatar {
+  background: #dff9ff;
+}
+.notification .outcome {
+  background: var(--aqua);
+  color: #203e51;
+}
+.notification .outcome.blocked {
+  background: var(--sand);
+  color: #50360f;
+}
+.notification .outcome.released {
+  background: var(--sky);
+  color: #203e51;
+}
+.conversation {
+  border-top: 5px solid var(--sky);
+}
+.conversation progress {
+  accent-color: #2676a0;
+}
+.welcome {
+  width: min(540px, calc(100% - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-top: 8px solid var(--sand);
+  border-radius: 20px;
+  padding: 28px;
+  color: #203e51;
+  background: #f8fcff;
+  box-shadow: 0 25px 80px #203e5133;
+}
+.welcome::backdrop {
+  background: #18364799;
+}
+.welcome h2 {
+  font-size: 26px;
+  margin: 12px 0 20px;
+}
+.welcome p {
+  font-size: 15px;
+}
+.welcome .primary {
+  width: 100%;
+  margin-top: 10px;
+}
+.welcome .source {
+  font-size: 12px;
+}
+.welcome a {
+  color: #23546d;
+}
