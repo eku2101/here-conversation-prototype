@@ -120,3 +120,10 @@ assert.equal(get("attention").value, 100);
 console.log(
   "PASS: attention bounds, mood transitions, blocked attention preservation, category opt-out, single open penalty, reconnect, Focus off/on, contact selection, emergency override, all low-priority types, delayed queue release without duplication, and reset.",
 );
+
+// The explanation opens before the demo and remains available after dismissal.
+assert.equal(get("welcome").open, true);
+click("welcome-start");
+assert.equal(get("welcome").open, false);
+click("about-prototype");
+assert.equal(get("welcome").open, true);

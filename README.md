@@ -75,7 +75,7 @@ Blocking prevents further loss; it does not automatically restore attention. The
 
 **Sync profile pictures** lets you choose a PNG, JPG, or WebP up to 5 MB per contact. The picture updates that contact's card and existing/future notifications in this tab. This is local visual syncing, not integration with real contacts or accounts.
 
-Messages, settings, attention, and pictures stay in JavaScript memory. There is no database, login, external API, backend, analytics, or stored simulation data. A localStorage flag remembers whether the welcome introduction has been dismissed. Pictures are local object URLs, never uploaded. Reloading or resetting clears the session. No external fonts, scripts, or images are required.
+Messages, settings, attention, and pictures stay in JavaScript memory. There is no database, login, external API, backend, analytics, or stored simulation data. A welcome explanation appears on every page load before you enter the prototype. No localStorage is used. Pictures are local object URLs, never uploaded. Reloading or resetting clears the session. No external fonts, scripts, or images are required.
 
 ## Optional developer checks
 

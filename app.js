@@ -359,24 +359,10 @@ $("reset").addEventListener("click", () => {
 });
 render();
 
-// Only the dismissed introduction is remembered. Simulation state stays in memory.
-// Storage may be unavailable for local files or private browsing; the demo still works.
-const welcomeKey = "in-person-focus.welcome.v1";
+// Show the explanation on every page load, before interacting with the demo.
 function showWelcome() {
   if (!$("welcome").open) $("welcome").showModal();
 }
-function rememberWelcome() {
-  try {
-    localStorage.setItem(welcomeKey, "seen");
-  } catch {
-    /* Storage is optional. */
-  }
-}
 $("welcome-start").addEventListener("click", () => $("welcome").close());
-$("welcome").addEventListener("close", rememberWelcome);
 $("about-prototype").addEventListener("click", showWelcome);
-try {
-  if (localStorage.getItem(welcomeKey) !== "seen") showWelcome();
-} catch {
-  showWelcome();
-}
+showWelcome();

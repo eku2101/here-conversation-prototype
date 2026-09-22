@@ -73,10 +73,10 @@ The simulation assumes that every allowed notification has an immediate attentio
 
 Ask someone to configure the filter, predict what will happen to a few messages, and explain the results afterward. Observe whether they understand the settings, the waiting queue, and the distinction between important and distracting interruptions. Ask which assumptions feel inaccurate. This would evaluate the clarity of the design; a claim about real conversational benefit would require a separate study.
 
-## Visual direction and first visit
+## Visual direction and opening introduction
 
 The interface uses [Figma's California beaches palette](https://www.figma.com/resource-library/color-combinations/#combination-29-california-beaches): orange `#FFC067`, aqua `#66F4FF`, sky blue `#66C4FF`, and blue-gray `#7D99AA`. Pale surfaces and dark blue text support readability.
 
-A brief first-visit introduction distinguishes this simulation from Apple's real notification controls. Apple Focus already supports selected people and apps; the prototype's distinguishing purpose is to visualize assumed conversation effects. The comparison references [Apple's Focus guide](https://support.apple.com/guide/iphone/allow-or-silence-notifications-for-a-focus-iph21d43af5b/ios).
+A brief introduction on every page load distinguishes this simulation from Apple's real notification controls. Apple Focus already supports selected people and apps; the prototype's distinguishing purpose is to visualize assumed conversation effects. The comparison references [Apple's Focus guide](https://support.apple.com/guide/iphone/allow-or-silence-notifications-for-a-focus-iph21d43af5b/ios).
 
-Only a dismissed-introduction flag is saved in localStorage. If storage is unavailable, the introduction may appear again after reload; the app remains usable. The footer button reopens it anytime. Resetting the simulation does not reset this preference.
+The introduction appears before interacting with the prototype on every page load, including return visits. The Explore button dismisses it for the current visit, and the footer button reopens it anytime. No localStorage preference is read or written.
